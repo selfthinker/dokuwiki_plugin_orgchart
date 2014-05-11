@@ -1,0 +1,32 @@
+
+.google-visualization-orgchart-table {
+    border-width: 0;
+    border-collapse: separate;
+}
+.dokuwiki table.orgchart tr:hover td,
+.dokuwiki .wrap_orgchart table tr:hover td {
+    background-color: inherit;
+}
+.dokuwiki .wrap_orgchart table {
+    width: auto !important;
+}
+
+.google-visualization-orgchart-table .google-visualization-orgchart-node {
+    vertical-align: top;
+    line-height: 1.1;
+    border-radius: 3px;
+}
+
+.google-visualization-orgchart-table .google-visualization-orgchart-node a {
+    padding: 0;
+}
+.google-visualization-orgchart-table .google-visualization-orgchart-node strong {
+    display: block;
+    padding: 0;
+    margin-bottom: .3em;
+}
+.google-visualization-orgchart-table .google-visualization-orgchart-node img {
+    display: inline-block;
+    padding: 0;
+    margin-bottom: .3em;
+}

@@ -1,0 +1,54 @@
+==== OrgChart plugin for DokuWiki ====
+
+See plugin.info.txt for information regarding version, author and links.
+
+
+=== Create org charts by using a table ===
+
+This plugin requires either the Wrap Plugin [https://www.dokuwiki.org/plugin:wrap] or the Data Plugin [https://www.dokuwiki.org/plugin:data].
+
+
+== Using Wrap Plugin ==
+
+<WRAP orgchart>
+^Name           ^Line Manager   ^Job Title          ^Photo                   ^
+|Alice Baker    |Bob Smith      |PR                 |{{:staff:alice.png?60}} |
+|Bob Smith      |Carol Davidson |Marketing Director |{{:staff:bob.jpg?60}}   |
+|Carol Davidson |               |CEO                |{{:staff:carol.jpg?60}} |
+|Dave Miller    |Carol Davidson |Secretary          |{{:staff:dave.jpg?60}}  |
+|Eric Taylor    |Bob Smith      |                   |                        |
+</WRAP>
+
+The order of the columns must be: name, line manager, job title, photo. Job title and photo are optional.
+The line manager's name must be the same as it appears in the name column of that manager.
+
+
+== Using Data Plugin ==
+
+Dataentry needs at least:
+* name (staff member's name, type: 'pageid' or simple string)
+* line manager (line manager's pagename, type: 'title' or 'page' or simple string; when using 'page' this needs to be the exact pagename, when using 'title' this can be e.g. 'alice_w' or 'Alice W' for page 'staff:alice_w', when using simple string it needs to be the exact same string for each entry of the same manager)
+
+Optional dataentry:
+* job title (staff member's job title, type: simple string)
+* photo (photo of staff member, type: 'img')
+
+Examples of tables:
+
+---- datatable orgchart ----
+cols    : name_pageid, title, linemanager_title
+headers : Name, Job Title, Line Manager
+sort    : name
+----
+
+---- datatable orgchart includelinks ----
+cols    : name_pageid, title, linemanager, photo_img60
+headers : Name, Job Title, Line Manager, Photo
+sort    : name
+----
+
+* class 'orgchart' necessary
+* order is important (same as above)
+* linemanager and photo columns are optional
+* class 'includelinks' results in link to a staff member's page being included
+* if type 'page' or 'title' is used for line manager, the link text doesn't need to match the exact name as the pagename in the link will be used to match managers
