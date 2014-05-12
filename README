@@ -36,14 +36,14 @@ Optional dataentry:
 Examples of tables:
 
 ---- datatable orgchart ----
-cols    : name_pageid, title, linemanager_title
-headers : Name, Job Title, Line Manager
+cols    : name_pageid, linemanager_title, title
+headers : Name, Line Manager, Job Title
 sort    : name
 ----
 
 ---- datatable orgchart includelinks ----
-cols    : name_pageid, title, linemanager, photo_img60
-headers : Name, Job Title, Line Manager, Photo
+cols    : name_pageid, linemanager, title, photo_img60
+headers : Name, Line Manager, Job Title, Photo
 sort    : name
 ----
 
