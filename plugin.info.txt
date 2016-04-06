@@ -1,7 +1,7 @@
 base     orgchart
 author   Anika Henke
 email    anika@selfthinker.org
-date     2014-05-11
+date     2016-04-06
 name     OrgChart Plugin
 desc     Create an Org Chart from a table
 url      https://www.dokuwiki.org/plugin:orgchart
