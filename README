@@ -27,7 +27,7 @@ The line manager's name must be the same as it appears in the name column of tha
 
 Dataentry needs at least:
 * name (staff member's name, type: 'pageid' or simple string)
-* line manager (line manager's pagename, type: 'title' or 'page' or simple string; when using 'page' this needs to be the exact pagename, when using 'title' this can be e.g. 'alice_w' or 'Alice W' for page 'staff:alice_w', when using simple string it needs to be the exact same string for each entry of the same manager)
+* line manager (line manager's pagename, type: 'page' or simple string; when using 'page' this needs to be the exact pagename, when using simple string it needs to be the exact same string for each entry of the same manager)
 
 Optional dataentry:
 * job title (staff member's job title, type: simple string)
@@ -36,7 +36,7 @@ Optional dataentry:
 Examples of tables:
 
 ---- datatable orgchart ----
-cols    : name_pageid, linemanager_title, title
+cols    : name_pageid, linemanager_page, title
 headers : Name, Line Manager, Job Title
 sort    : name
 ----
@@ -51,4 +51,4 @@ sort    : name
 * order is important (same as above)
 * linemanager and photo columns are optional
 * class 'includelinks' results in link to a staff member's page being included
-* if type 'page' or 'title' is used for line manager, the link text doesn't need to match the exact name as the pagename in the link will be used to match managers
+* if type 'page' is used for line manager, the link text doesn't need to match the exact name as the pagename in the link will be used to match managers
