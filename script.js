@@ -8,22 +8,35 @@ jQuery(document).ready(function() {
         return id;
     }
 
+    function drawChart(rows, container) {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Name');
+        data.addColumn('string', 'Manager');
+        data.addRows(rows);
+        var chart = new google.visualization.OrgChart(container);
+        chart.draw(data, {allowHtml:true, allowCollapse: true, size: 'medium'});
+    }
+
     if (typeof google !== 'undefined') {
         jQuery('table.orgchart, .wrap_orgchart table').each(function(){
             var staff = [];
             var $orgchart = jQuery(this);
+            var includelinks = $orgchart.hasClass('includelinks');
+
             jQuery('tr', $orgchart).not(':first').each(function(i){
-                $row = jQuery(this);
+                var $row = jQuery(this);
                 var id, name, title, manager, photo = '';
                 var name_detail = {};
+
                 jQuery('td', $row).each(function(j){
-                    $this = jQuery(this);
+                    var $this = jQuery(this);
+                    var $link = jQuery('a', $this);
+
                     switch(j) {
                         case 0:
                             name = $this.text().trim();
-                            var $link = jQuery('a', $this);
                             if ($link.length) {
-                                if ($orgchart.hasClass('includelinks')) {
+                                if (includelinks) {
                                     $link.removeClass('wikilink1');
                                     name = $this.html().trim();
                                 }
@@ -33,7 +46,6 @@ jQuery(document).ready(function() {
                             }
                             break;
                         case 1:
-                            var $link = jQuery('a', $this);
                             if ($link.length) {
                                 manager = getStaffId($link.attr('title'));
                             } else {
@@ -47,6 +59,7 @@ jQuery(document).ready(function() {
                             photo = $this.html();
                             break;
                     }
+
                     name_detail.v = id;
                     name_detail.f = ' <strong>' + name + '</strong> ';
                     if (title) {
@@ -56,20 +69,13 @@ jQuery(document).ready(function() {
                         name_detail.f = photo + name_detail.f;
                     }
                 });
+
                 staff[i] = [name_detail, manager];
             });
 
-            var $orgChartContainer = $orgchart.parent();
-
-            function drawChart() {
-                var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Name');
-                data.addColumn('string', 'Manager');
-                data.addRows(staff);
-                var chart = new google.visualization.OrgChart($orgChartContainer[0]);
-                chart.draw(data, {allowHtml:true, allowCollapse: true, size: 'medium'});
-            }
-            google.setOnLoadCallback(drawChart);
+            google.setOnLoadCallback(function(){
+                drawChart(staff, $orgchart.parent()[0]);
+            });
         });
     }
 
