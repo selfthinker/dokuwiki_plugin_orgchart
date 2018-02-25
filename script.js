@@ -1,6 +1,10 @@
 jQuery(document).ready(function() {
 
     function getStaffId(id) {
+        if (JSINFO['plugin_orgchart_conf']['useFullId'] === 1) {
+            return id;
+        }
+
         var sep_char_index = id.lastIndexOf(':');
         if (sep_char_index !== -1) {
             return id.substring(id.length, sep_char_index+1);
