@@ -22,6 +22,7 @@ class action_plugin_orgchart extends DokuWiki_Action_Plugin {
     // register hook
     function register(Doku_Event_Handler $controller) {
         $controller->register_hook('TPL_METAHEADER_OUTPUT','BEFORE', $this, '_addJavascript');
+        $controller->register_hook('DOKUWIKI_STARTED', 'AFTER',  $this, '_addconf');
     }
 
     /**
@@ -40,6 +41,22 @@ class action_plugin_orgchart extends DokuWiki_Action_Plugin {
             'charset' => 'utf-8',
             '_data'   => 'google.load("visualization", "1", {packages:["orgchart"]});'
         );
+    }
+
+    /**
+     * Add plugin's config to script
+     *
+     * @param unknown_type $event
+     * @param unknown_type $param
+     */
+    function _addconf(&$event, $param) {
+        global $JSINFO;
+        $JSINFO['plugin_orgchart_conf'] = array();
+
+        $config_keys = array('useFullId');
+        foreach($config_keys as $key) {
+            $JSINFO['plugin_orgchart_conf'][$key] = $this->getConf($key);
+        }
     }
 
 }
